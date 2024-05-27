@@ -3,7 +3,8 @@
 npm install
 npm install --save @permaweb/aoconnect
 
-setting discord bot token 
+//setting discord bot /config.json in token
+//setting discord channelId /.env in channelId
 
 npm run star
 
