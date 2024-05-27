@@ -9,11 +9,12 @@ async function polling() {
     if (cursor == '') {
       const resultsOut = await results({
         process: 'IeVmvpbu87FyQotxNLmMPtCaNHhyYFtE6phm2kISSC8',
-        from: cursor,
         sort: 'DESC',
         limit: 1,
       });
       cursor = resultsOut.edges[0].cursor;
+
+      //console.error('1_____' + cursor);
     }
 
     console.log('Polling...');
@@ -21,26 +22,20 @@ async function polling() {
       process: 'IeVmvpbu87FyQotxNLmMPtCaNHhyYFtE6phm2kISSC8',
       from: cursor,
       sort: 'ASC',
-      limit: 25,
+      limit: 50,
     });
 
-
-    for (const element of resultsOut2.edges) {
+    for (const element of resultsOut2.edges.reverse()) {
       cursor = element.cursor;
-      console.error(cursor);
       if (element.node.Messages.length == 0) {
         continue;
       }
       const elementData = element.node.Messages;
       const messagesData = elementData.filter(e => e.Target == 'IeVmvpbu87FyQotxNLmMPtCaNHhyYFtE6phm2kISSC8' && e.Tags.length > 0 && e.Tags.some(f => f.name == 'Action' && f.value == 'SendDiscordMsg'));
       for (const messagesItem of messagesData) {
-        if (elementData) {
-          console.log(messagesItem);
           const event = messagesItem.Tags.find(e => e.name == 'Event')?.value;
           const sendTest = event + ' : ' + messagesItem.Data;
           parentPort.postMessage(sendTest);
-
-        }
       }
     }
 
