@@ -1,15 +1,3 @@
---[[
-Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
-Date: 2024-05-26 15:43:56
-LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
-LastEditTime: 2024-05-27 00:32:53
-FilePath: \ao\chatroom.lua
-Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
---]]
-local json = require("json")
-
-
-SendDiscordLists = SendDiscordLists or {}
 
 
 Colors = {
@@ -26,8 +14,29 @@ Handlers.add(
   "Register",
   Handlers.utils.hasMatchingTag("Action", "Register"),
   function (msg)
-    table.insert(Members, msg.From)
+    local isAddMembers=true;
+    for index, value in ipairs(Members) do
+      if value==msg.From then
+        isAddMembers=false
+        break
+      end
+    end
+    if isAddMembers==true then
+      table.insert(Members, msg.From)
+    end
     Handlers.utils.reply("registered")(msg)
+  end
+)
+
+Handlers.add(
+  "UnRegister",
+  Handlers.utils.hasMatchingTag("Action", "UnRegister"),
+  function (msg)
+    for index, value in ipairs(Members) do
+      if value==msg.From then
+        table.remove(Members, index)
+      end
+    end
   end
 )
 
@@ -76,13 +85,6 @@ function Broadcast(msg)
     ao.send({Target = ao.id,Action = "SendDiscordMsg", Data = msg.Data,Event=fromText,OriginatingFrom=msg.From})
 end
 
-Handlers.add(
-  "SendDiscordMsg",
-  Handlers.utils.hasMatchingTag("Action", "SendDiscordMsg"),
-  function (msg)
-    -- table.insert(SendDiscordLists,{From=msg.OriginatingFrom,Data=msg.Date,Event=msg.Event})
-  end
-)
 
 
 
