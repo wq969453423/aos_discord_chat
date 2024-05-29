@@ -9,6 +9,10 @@ npm install --save @permaweb/aoconnect
 npm run star
 
 
+//Linking index.js to Discord
+//API/sendmsg.js is responsible for sending messages to Discord
+//API/worker.js is responsible for sending messages to AOS
+
 ```
 
 https://discord.gg/ePSFQqwz
