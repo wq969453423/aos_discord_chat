@@ -3,18 +3,15 @@
 npm install
 npm install --save @permaweb/aoconnect
 
-//setting discord bot /config.json in token
-//setting discord channelId /.env in channelId
+
 
 npm run star
-
-
-//Linking index.js to Discord
-//API/sendmsg.js is responsible for sending messages to Discord
-//API/worker.js is responsible for sending messages to AOS
-
-//.load chatroom.lua
 ```
+
+//index.js is used to connect to the Discord service. Before connecting,
+//please configure the token in the config.json file and the channel in the .env file.
+//  /api/sendmsg.js is triggered in index.js and is responsible for sending discord messages to aos.
+//  /api/worker.js file is responsible for sending aos messages to discord.
 
 
 
