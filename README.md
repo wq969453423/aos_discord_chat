@@ -9,8 +9,14 @@ npm run star
 ```
 
 //index.js is used to connect to the Discord service. Before connecting,
+
+
 //please configure the token in the config.json file and the channel in the .env file.
+
+
 //  /api/sendmsg.js is triggered in index.js and is responsible for sending discord messages to aos.
+
+
 //  /api/worker.js file is responsible for sending aos messages to discord.
 
 
